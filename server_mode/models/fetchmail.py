@@ -6,7 +6,6 @@ from odoo.addons.server_mode.mode import get_mode
 class FetchmailServer(models.Model):
     _inherit = 'fetchmail.server'
 
-    @api.multi
     def button_confirm_login(self):
         if get_mode():
             raise UserError(_(
@@ -14,7 +13,6 @@ class FetchmailServer(models.Model):
                 get_mode()))
         return super(FetchmailServer, self).button_confirm_login()
 
-    @api.multi
     def fetch_mail(self):
         if get_mode():
             raise UserError(_(
@@ -22,7 +20,6 @@ class FetchmailServer(models.Model):
                 get_mode()))
         return super(FetchmailServer, self).fetch_mail()
 
-    @api.multi
     def connect(self):
         if get_mode():
             raise UserError(_(
