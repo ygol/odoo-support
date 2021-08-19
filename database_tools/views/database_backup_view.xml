@@ -51,7 +51,6 @@
         <record model="ir.actions.act_window" id="action_database_backup_form">
                 <field name="name">Database Backups</field>
                 <field name="res_model">db.database.backup</field>
-                <field name="view_type">form</field>
                 <field name='view_mode'>tree,form</field>
         </record>
 

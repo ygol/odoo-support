@@ -19,7 +19,7 @@
 ##############################################################################
 {
     "name": "Database Tools",
-    "version": "9.0.1.4.0",
+    "version": "14.0.1.0.0",
     'author': 'ADHOC SA',
     'website': 'www.adhoc.com.ar',
     'license': 'AGPL-3',

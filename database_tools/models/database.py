@@ -123,7 +123,6 @@ class db_database(models.Model):
             res['detail'] = 'Backups errors:\n%s' % backups_state
         return res
 
-    @api.multi
     def get_backups_state(self):
         """
         """
@@ -164,7 +163,6 @@ class db_database(models.Model):
                         next_date))
         return res
 
-    @api.one
     @api.depends('type', 'not_self_name')
     def _get_name(self):
         name = self.not_self_name
@@ -172,7 +170,6 @@ class db_database(models.Model):
             name = self._cr.dbname
         self.name = name
 
-    @api.one
     @api.depends('backup_ids')
     def _get_backups(self):
         self.backup_count = len(self.backup_ids)
@@ -186,7 +183,6 @@ class db_database(models.Model):
                 db_cr, 1, 'database.backups.enable', str(state_type))
         return True
 
-    @api.one
     def update_backups_data(self):
         """Check if backups exists on filesystem, if not, unlink records"""
         for backup in self.backup_ids:
@@ -194,7 +190,6 @@ class db_database(models.Model):
                 backup.unlink()
         return True
 
-    @api.one
     def drop_con(self):
         """
         Drop connections. This is used when can not make backups.
@@ -208,7 +203,6 @@ class db_database(models.Model):
         #     db_ws._drop_conn(pg_cr, self.name)
         return True
 
-    @api.one
     @api.constrains('type', 'not_self_name')
     def _check_db_exist(self):
         """Checks if database exists"""
@@ -284,14 +278,12 @@ class db_database(models.Model):
                 'Type must be one of "days, weekly or monthly"')
         return next_date
 
-    @api.one
     def action_database_backup_clean(self):
         """Action to be call from buttons"""
         _logger.info('Action database backup clean called manually')
         res = self.database_backup_clean()
         return res
 
-    @api.multi
     def database_backup_clean(self, bu_type=None):
         """If bu_type is:
         * none, then clean will affect automatic and manual backups
@@ -305,7 +297,6 @@ class db_database(models.Model):
 
         self.action_remove_unlisted_files()
 
-    @api.multi
     def action_remove_unlisted_files(self):
         _logger.info('Removing unlisted files')
         for db in self:
@@ -328,7 +319,6 @@ class db_database(models.Model):
                 'this is what we get:\n'
                 '%s' % (directory, e.strerror))
 
-    @api.multi
     def database_manual_backup_clean(self):
         _logger.info('Runing Manual Backups Clean')
         domain = [
@@ -339,7 +329,6 @@ class db_database(models.Model):
             domain)
         to_delete_backups.unlink()
 
-    @api.one
     def database_auto_backup_clean(self):
         _logger.info('Runing Automatic Backups Clean')
         # automatic backups
@@ -388,7 +377,6 @@ class db_database(models.Model):
             backup._cr.commit()
         return True
 
-    @api.multi
     def database_backup(
             self, bu_type='manual',
             backup_format='zip', backup_name=False, keep_till_date=False):

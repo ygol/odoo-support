@@ -30,7 +30,6 @@ class db_database_backup_now_wizard(models.TransientModel):
         default=get_default_keep_till_date,
     )
 
-    @api.multi
     def confirm(self):
         self.ensure_one()
         active_id = self.env.context.get('active_id', False)

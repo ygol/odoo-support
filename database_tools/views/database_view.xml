@@ -77,7 +77,6 @@
         <record model="ir.actions.act_window" id="action_database_form">
                 <field name="name">Databases</field>
                 <field name="res_model">db.database</field>
-                <field name="view_type">form</field>
                 <field name='view_mode'>tree,form</field>
         </record>
 

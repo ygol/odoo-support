@@ -45,12 +45,10 @@ class database_backup(models.Model):
         required=True
     )
 
-    @api.one
     @api.depends('path', 'name')
     def get_full_path(self):
         self.full_path = os.path.join(self.path, self.name)
 
-    @api.multi
     def unlink(self):
         for backup in self:
             backup.database_id.remove_directory(backup.full_path)
