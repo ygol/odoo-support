@@ -29,7 +29,7 @@
         'base_setup',
     ],
     'external_dependencies': {
-        'python': ['fabric']
+        'python': ['fabric3']
     },
     'data': [
         'wizard/db_database_backup_now_wizard_view.xml',
