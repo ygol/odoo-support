@@ -7,7 +7,7 @@ from odoo.exceptions import ValidationError
 from odoo import modules
 from ast import literal_eval
 # from odoo.addons.base.module.module import module
-from odoo.addons.base.ir_module import module
+from odoo.addons.base import ir_module
 import logging
 
 _logger = logging.getLogger(__name__)
